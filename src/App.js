@@ -1,28 +1,36 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import "./App.css";
+import useInterval from "./useInterval";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+export default function App() {
+  const [text, setText] = useState('lol');
+  const [time, setTime] = useState(500);
+
+  useInterval(() => console.log(text), time);
+
+  const changeTest = () => {
+    setText(`${text} ${text}`);
+  };
+
+  const setNullTime = () => {
+    setTime(null);
+  };
+
+  const changeTime = () => {
+    setTime(time / 2);
+  };
+
+  return (
+    <div className="App">
+      <header className="App-header">
+
+        <p>open console</p>
+
+        <button onClick={changeTest}>change text</button>
+        <button onClick={changeTime}>change time</button>
+        <button onClick={setNullTime}>set null time</button>
+
+      </header>
+    </div>
+  );
 }
-
-export default App;
